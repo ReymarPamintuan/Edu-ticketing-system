@@ -137,10 +137,10 @@ const AddTaskModal = () => {
         assignee: data.assign,
         // get only data value from startDate and endDate
         category: null,
-        startDate: startDate.toISOString().split("T")[0],
-        endDate: endDate.toISOString().split("T")[0],
-        des: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
-        progress: Math.floor(Math.random() * (100 - 10 + 1) + 10),
+        // startDate: startDate.toISOString().split("T")[0],
+        // endDate: endDate.toISOString().split("T")[0],
+        // des: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+        // progress: Math.floor(Math.random() * (100 - 10 + 1) + 10),
       })
     );
     dispatch(

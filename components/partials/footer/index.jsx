@@ -18,16 +18,23 @@ const Footer = ({ className = "custom-class" }) => {
       <div className="site-footer px-6 bg-[#eeeeee]  text-slate-500 dark:text-slate-300 py-4">
         <div className="grid md:grid-cols-2 grid-cols-1 md:gap-5">
           <div className="text-center ltr:md:text-start rtl:md:text-right text-sm">
-            COPYRIGHT &copy; 2022 DashCode, All rights Reserved
+            <a
+              href="#"
+              target="_blank"
+              className="text-primary-500 text-yellow-600  font-semibold"
+            >
+              Performance Scoring {" "}
+            </a> 
+            &copy; 2023
           </div>
           <div className="ltr:md:text-right rtl:md:text-end text-center text-sm">
-            Hand-crafted & Made by{" "}
+            Designed with by{" "}
             <a
-              href="https://codeshaper.net"
+              href="#"
               target="_blank"
-              className="text-primary-500 font-semibold"
+              className="text-primary-500 text-yellow-600 font-semibold"
             >
-              Codeshaper
+              Performance Scoring 
             </a>
           </div>
         </div>

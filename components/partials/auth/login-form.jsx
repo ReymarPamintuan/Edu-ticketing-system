@@ -65,7 +65,7 @@ const LoginForm = () => {
       />
       <Textinput
         name="password"
-        label="passwrod"
+        label="password"
         type="password"
         defaultValue="dashcode"
         register={register}
