@@ -20,7 +20,7 @@ const ProfileLabel = () => {
       </div> */}
       <div className="flex-none text-slate-600 text-white text-sm font-normal items-center lg:flex hidden overflow-hidden text-ellipsis whitespace-nowrap">
         <span className="overflow-hidden text-ellipsis whitespace-nowrap w-[130px] block font-[600]">
-           Reymar Pamintuan
+          Reymar Pamintuan
         </span>
         <span className="text-base inline-block ltr:ml-[10px] rtl:mr-[10px]">
           <Icon icon="heroicons-outline:chevron-down"></Icon>
@@ -49,7 +49,7 @@ const Profile = () => {
       action: () => {
         router.push("/settings");
       },
-      hasDivider: true
+      hasDivider: true,
     },
     {
       label: "Reset Intro Guide",
@@ -57,7 +57,7 @@ const Profile = () => {
       action: () => {
         router.push("/pricing");
       },
-      hasDivider: true
+      hasDivider: true,
     },
     {
       label: "Logout",

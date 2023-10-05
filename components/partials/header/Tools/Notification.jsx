@@ -4,12 +4,14 @@ import Dropdown from "@/components/ui/Dropdown";
 import Link from "next/link";
 import { Menu } from "@headlessui/react";
 import { notifications } from "@/constant/data";
-import { Icon } from '@iconify/react';
+import { Icon } from "@iconify/react";
 
 const notifyLabel = () => {
   return (
     <span className="flex lg:h-[32px] lg:w-[62px] text-slate-900 lg:dark:bg-slate-900 text-white cursor-pointer rounded-full text-[20px] items-center justify-center mr-[22px]">
-      <sapn><Icon icon="heroicons-outline:bell" className="animate-tada" /></sapn>
+      <sapn>
+        <Icon icon="heroicons-outline:bell" className="animate-tada" />
+      </sapn>
       <span className="h-4 w-4 bg-[#04448b] text-[10px] font-semibold flex items-center justify-center rounded-full text-white z-[99]">
         1
       </span>
@@ -43,7 +45,9 @@ const Notification = () => {
               >
                 <div className="flex ltr:text-left rtl:text-right">
                   <div className="flex-none ltr:mr-3 rtl:ml-3">
-                      <div className='text-[21px] text-green-600 mr-[5px] cursor-pointer'><Icon icon="icon-park-solid:check-one" /></div>
+                    <div className="text-[21px] text-green-600 mr-[5px] cursor-pointer">
+                      <Icon icon="icon-park-solid:check-one" />
+                    </div>
                   </div>
                   <div className="flex-1">
                     <div
@@ -79,7 +83,15 @@ const Notification = () => {
           </Menu.Item>
         ))}
       </div>
-      <div className="text-center px-2 py-2"><Link className="flex justify-center items-center gap-2 px-4 py-2 bg-[#f8f9fa] font-[600]" href="#"><Icon icon="fa-solid:eye"></Icon><span>View All</span></Link></div>
+      <div className="text-center px-2 py-2">
+        <Link
+          className="flex justify-center items-center gap-2 px-4 py-2 bg-[#f8f9fa] font-[600]"
+          href="#"
+        >
+          <Icon icon="fa-solid:eye"></Icon>
+          <span>View All</span>
+        </Link>
+      </div>
     </Dropdown>
   );
 };

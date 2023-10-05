@@ -716,6 +716,10 @@ export const CompanyName = [
     name: "Company HIJ",
     value: "HIJ",
   },
+  {
+    name: "Company HIJ",
+    value: "HIJ",
+  },
 ];
 
 export const colors = {

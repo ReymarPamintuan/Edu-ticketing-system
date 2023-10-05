@@ -8,6 +8,7 @@ import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
 import Dropdown from "@/components/ui/Dropdown";
 import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   useTable,
   useRowSelect,
@@ -93,9 +94,9 @@ const InvoiceChanged2Page = ({ advancedTable }) => {
     //       <span
     //         className={` text-[16px] font-[600] ${
     //           row?.cell?.value === "Tier 3" ? "text-[#e13030]" : ""
-    //         } 
+    //         }
     //               ${row?.cell?.value === "Tier 1" ? "text-[#af1214]" : ""}
-                
+
     //             `}
     //       >
     //         {row?.cell?.value}
@@ -149,9 +150,9 @@ const InvoiceChanged2Page = ({ advancedTable }) => {
     //         <span
     //           className={` text-[16px] font-[600] min-w-[90px] text-center mx-auto py-1 ${
     //             row?.cell?.value === "Open" ? "text-[#fabc43]" : ""
-    //           } 
+    //           }
     //         ${row?.cell?.value === "Pending" ? "text-[#19a5ad]" : ""}
-            
+
     //          `}
     //         >
     //           {row?.cell?.value}
@@ -221,7 +222,7 @@ const InvoiceChanged2Page = ({ advancedTable }) => {
     useGlobalFilter,
     useSortBy,
     usePagination,
-    useRowSelect,
+    useRowSelect
 
     // (hooks) => {
     //   hooks.visibleColumns.push((columns) => [
@@ -266,15 +267,15 @@ const InvoiceChanged2Page = ({ advancedTable }) => {
   return (
     <>
       <Card>
-        { locationName ==="locations" ? (
+        {locationName === "locations" ? (
           <div className="flex justify-between items-center bg-[#dfdfdf] px-6 py-2">
             <p className="font-[600] text-[19px] text-[#000000]">Ticket List</p>
-            <Button
+            <Link
               className="bg-[#6c757d] px-[10px] py-[4px] text-white"
-              href="#"
+              href="locations/create-ticket"
             >
               Create Ticket
-            </Button>
+            </Link>
           </div>
         ) : (
           <></>

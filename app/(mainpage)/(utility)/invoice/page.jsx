@@ -9,7 +9,9 @@ import Icon from "@/components/ui/Icon";
 import { useRouter, usePathname } from "next/navigation";
 import CSVButton from "@/components/partials/widget/CSVButton";
 import PrintButton from "@/components/partials/widget/PrintButton";
+import Tooltip from "@/components/ui/Tooltip";
 import Link from "next/link";
+import Pagination from "@/components/ui/Pagination";
 import {
   useTable,
   useRowSelect,
@@ -42,6 +44,15 @@ const IndeterminateCheckbox = React.forwardRef(
 );
 
 const InvoicePage = ({ advancedTable }) => {
+  //pagination start
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(6);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // You can add any other logic you need here, such as making an API call to fetch data for the new page
+  };
+  //pagination end
   // const InvoicePage = (props) => {
   const router = useRouter();
   const location = usePathname();
@@ -178,11 +189,16 @@ const InvoicePage = ({ advancedTable }) => {
                            ${data === "reject" ? "bg-red-600" : ""} 
                            ${data === "accept" ? "bg-green-600" : ""}`}
                 // href={`ticket-details/${ parseInt(row?.cell?.row.id) + 1}`}
-                href={`ticket-details/${row?.cell?.row?.original.id}`}
+                href={`${
+                  data === "details"
+                    ? `ticket-details/${row?.cell?.row?.original?.id}`
+                    : `ticket-address/${row?.cell?.row?.original?.id}`
+                }`}
               >
                 {data}
               </Link>
             ))}
+            {console.log("Link-test:", row?.cell?.row)}
           </div>
         );
 
@@ -233,7 +249,7 @@ const InvoicePage = ({ advancedTable }) => {
     setModalOpen(true);
     setTimeout(() => {
       setModalOpen(false);
-    }, 2500);
+    }, 1500);
   };
 
   return (
@@ -259,31 +275,47 @@ const InvoicePage = ({ advancedTable }) => {
         )}
         <div className="flex relative justify-center items-center gap-1 pt-[30px] mb-[10px] px-6 py-2">
           <div className="flex gap-1">
-            <button className='px-[10px] py-[4px] bg-[#6c757d] text-white rounded-[2px] font-[600]' onClick={handleButtonClick}>Copy</button>
+            <button
+              className="px-[10px] py-[4px] bg-[#6c757d] text-white rounded-[2px] font-[600]"
+              onClick={handleButtonClick}
+            >
+              Copy
+            </button>
             <CSVButton />
-            <PrintButton selectId="dashboardtable"/>
+            <PrintButton selectId="dashboardtable" />
           </div>
-          {modalOpen &&
-          <div className="absolute flex justify-center items-center z-[100]">
-            <div className={` border-2 w-[400px] `}>
-              <div className="flex justify-center items-center px-2 py-3 border-b border-black bg-[#f4f4f4]">
-                <h3>Copy to clipboard</h3>
-              </div>
-              <div className="flex justify-center items-center px-2 py-2 bg-white">
-                <p>Copied 5 rows to clipboard.</p>
+          {modalOpen && (
+            <div className="absolute flex justify-center items-center z-[100]">
+              <div className={` border-2 w-[400px] `}>
+                <div className="flex justify-center items-center px-2 py-3 border-b border-black bg-[#f4f4f4]">
+                  <h3>Copy to clipboard</h3>
+                </div>
+                <div className="flex justify-center items-center px-2 py-2 bg-white">
+                  <p>Copied 5 rows to clipboard.</p>
+                </div>
               </div>
             </div>
-          </div>
-          }
+          )}
         </div>
-        <div className="flex flex-row-reverse px-6 py-3">
+        <div className="flex justify-between items-center px-6 py-3">
+          <select
+            className="form-control py-2 w-max"
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+          >
+            {[5, 10, 15, 20, 25, 30].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                {pageSize}
+              </option>
+            ))}
+          </select>
           <div className="w-[200px] ">
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
           </div>
         </div>
         <div className="overflow-x-auto -mx-6 px-6">
           <div className="inline-block min-w-full align-middle">
-            <div className="overflow-hidden px-6"  id="dashboardtable">
+            <div className="overflow-hidden px-6" id="dashboardtable">
               <table
                 className="border-collapse border border-slate-400 min-w-full table-fixed"
                 {...getTableProps}
@@ -344,73 +376,70 @@ const InvoicePage = ({ advancedTable }) => {
           </div>
         </div>
         <div className="md:flex md:space-y-0 space-y-5 justify-between mt-6 items-center px-6 pb-6">
-          <div className=" flex items-center space-x-3 rtl:space-x-reverse">
-            <span className=" flex space-x-2  rtl:space-x-reverse items-center">
-              <span className=" text-sm font-medium text-slate-600 dark:text-slate-300">
-                Go
-              </span>
-              <span>
-                <input
-                  type="number"
-                  className=" form-control py-2"
-                  defaultValue={pageIndex + 1}
-                  onChange={(e) => {
-                    const pageNumber = e.target.value
-                      ? Number(e.target.value) - 1
-                      : 0;
-                    gotoPage(pageNumber);
-                  }}
-                  style={{ width: "50px" }}
-                />
-              </span>
-            </span>
-            <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
-              Page{" "}
-              <span>
-                {pageIndex + 1} of {pageOptions.length}
-              </span>
-            </span>
-          </div>
-          <ul className="flex items-center  space-x-3  rtl:space-x-reverse mr-[20px]">
-            <li className="text-xl leading-4 text-slate-900 dark:text-white rtl:rotate-180">
-              <button
-                className={` ${
-                  !canPreviousPage ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-              >
-                <Icon icon="heroicons-outline:chevron-left" />
-              </button>
-            </li>
-            {pageOptions.map((page, pageIdx) => (
-              <li key={pageIdx}>
+          <div className="flex justify-end w-full">
+            <ul className="flex justify-end items-center   space-x-3  rtl:space-x-reverse flex-wrap">
+              {/* <li className="text-xl leading-4 text-slate-900 dark:text-white rtl:rotate-180">
                 <button
-                  href="#"
-                  aria-current="page"
                   className={` ${
-                    pageIdx === pageIndex
-                      ? "bg-[#11416b] w-[40px] h-[40px] text-white font-medium  "
-                      : "bg-[#11416b] text-slate-900 w-[40px] h-[40px]  font-normal  "
-                  }    text-sm rounded leading-[16px] flex h-6 w-6 items-center justify-center transition-all duration-150`}
-                  onClick={() => gotoPage(pageIdx)}
+                    !canPreviousPage ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => gotoPage(0)}
+                  disabled={!canPreviousPage}
                 >
-                  {page + 1}
+                  <Icon icon="heroicons:chevron-double-left-solid" />
+                </button>
+              </li> */}
+              <li className="text-sm leading-4 text-slate-900 dark:text-white rtl:rotate-180">
+                <button
+                  className={` ${
+                    !canPreviousPage ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => previousPage()}
+                  disabled={!canPreviousPage}
+                >
+                  <Icon icon="fluent:ios-arrow-24-regular" />
                 </button>
               </li>
-            ))}
-            <li className="text-xl leading-4 text-slate-900 dark:text-white rtl:rotate-180">
-              <button
-                className={` ${
-                  !canNextPage ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                onClick={() => nextPage()}
-                disabled={!canNextPage}
-              >
-                <Icon icon="heroicons-outline:chevron-right" />
-              </button>
-            </li>
-          </ul>
+              {pageOptions.map((page, pageIdx) => (
+                <li key={pageIdx}>
+                  <button
+                    href="#"
+                    aria-current="page"
+                    className={` ${
+                      pageIdx === pageIndex
+                        ? "bg-slate-900 dark:bg-slate-600  dark:text-slate-200 text-white font-medium "
+                        : "bg-slate-100 dark:bg-slate-700 dark:text-slate-400 text-slate-900  font-normal  "
+                    }    text-sm rounded leading-[16px] flex h-6 w-6 items-center justify-center transition-all duration-150`}
+                    onClick={() => gotoPage(pageIdx)}
+                  >
+                    {page + 1}
+                  </button>
+                </li>
+              ))}
+              <li className="text-sm leading-4 text-slate-900 dark:text-white rtl:rotate-180">
+                <button
+                  className={` ${
+                    !canNextPage ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => nextPage()}
+                  disabled={!canNextPage}
+                >
+                  <Icon icon="fluent:ios-arrow-24-regular" rotate={2} />
+                </button>
+              </li>
+              {/* <li className="text-xl leading-4 text-slate-900 dark:text-white rtl:rotate-180">
+                <button
+                  onClick={() => gotoPage(pageCount - 1)}
+                  disabled={!canNextPage}
+                  className={` ${
+                    !canNextPage ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
+                  <Icon icon="heroicons:chevron-double-right-solid" />
+                </button>
+              </li> */}
+            </ul>
+          </div>
         </div>
       </Card>
     </>

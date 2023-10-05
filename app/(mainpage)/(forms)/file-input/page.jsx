@@ -6,7 +6,7 @@ import Fileinput from "@/components/ui/Fileinput";
 import DropZone from "@/components/partials/froms/DropZone";
 
 const FileinputPage = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  
   const [selectedFile2, setSelectedFile2] = useState(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [selectedFiles2, setSelectedFiles2] = useState([]);

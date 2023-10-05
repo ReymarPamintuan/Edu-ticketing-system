@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
 import { toast } from "react-toastify";
+import { FlashOnRounded } from "@mui/icons-material";
 
 export const appKanbanSlice = createSlice({
   name: "appkanban",
@@ -9,7 +10,7 @@ export const appKanbanSlice = createSlice({
     columModal: false,
     taskModal: false,
     isLoading: null,
-    openTaskId: null,
+    openTaskId: false,
 
     // for edit
     editModal: false,
@@ -84,86 +85,119 @@ export const appKanbanSlice = createSlice({
               },
             ],
           },
+          // {
+          //   id: uuidv4(),
+          //   assignee: [
+          //     {
+          //       image: "/assets/images/avatar/av-1.svg",
+          //       title: "Mahedi Amin",
+          //     },
+          //     {
+          //       image: "/assets/images/avatar/av-2.svg",
+          //       title: "Sovo Haldar",
+          //     },
+          //     {
+          //       image: "/assets/images/avatar/av-3.svg",
+          //       title: "Rakibul Islam",
+          //     },
+          //   ],
+          //   name: "Edfdsf Fgsdgsdg",
+          //   // des: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+          //   // startDate: "2022-10-03",
+          //   // endDate: "2022-10-06",
+          //   // progress: 55,
+          //   category: [
+          //     {
+          //       value: "team",
+          //       label: "team",
+          //     },
+          //     {
+          //       value: "low",
+          //       label: "low",
+          //     },
+          //   ],
+          // },
+          
         ],
       },
-      {
-        id: uuidv4(),
-        name: "In Progress",
-        color: "#FA916B",
-        tasks: [
-          {
-            id: uuidv4(),
-            assignee: [
-              {
-                image: "/assets/images/avatar/av-1.svg",
-                title: "Mahedi Amin",
-              },
-              {
-                image: "/assets/images/avatar/av-2.svg",
-                title: "Sovo Haldar",
-              },
-              {
-                image: "/assets/images/avatar/av-3.svg",
-                title: "Rakibul Islam",
-              },
-            ],
-            name: "Business Dashboard ",
-            des: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
-            startDate: "2022-10-03",
-            endDate: "2022-10-06",
-            progress: 75,
-            category: [
-              {
-                value: "team",
-                label: "team",
-              },
-              {
-                value: "low",
-                label: "low",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: uuidv4(),
-        name: "Done",
-        color: "#50C793",
-        tasks: [
-          {
-            id: uuidv4(),
-            assignee: [
-              {
-                image: "/assets/images/avatar/av-1.svg",
-                title: "Mahedi Amin",
-              },
-              {
-                image: "/assets/images/avatar/av-2.svg",
-                title: "Sovo Haldar",
-              },
-              {
-                image: "/assets/images/avatar/av-3.svg",
-                title: "Rakibul Islam",
-              },
-            ],
-            name: "Management Dashboard ",
-            des: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
-            startDate: "2022-10-03",
-            endDate: "2022-10-06",
-            progress: 40,
-            category: [
-              {
-                value: "team",
-                label: "team",
-              },
-              {
-                value: "low",
-                label: "low",
-              },
-            ],
-          },
-        ],
-      },
+      // {
+      //   id: uuidv4(),
+      //   name: "In Progress",
+      //   color: "#FA916B",
+      //   tasks: [
+      //     {
+      //       id: uuidv4(),
+      //       assignee: [
+      //         {
+      //           image: "/assets/images/avatar/av-1.svg",
+      //           title: "Mahedi Amin",
+      //         },
+      //         {
+      //           image: "/assets/images/avatar/av-2.svg",
+      //           title: "Sovo Haldar",
+      //         },
+      //         {
+      //           image: "/assets/images/avatar/av-3.svg",
+      //           title: "Rakibul Islam",
+      //         },
+      //       ],
+      //       name: "Business Dashboard ",
+      //       des: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      //       startDate: "2022-10-03",
+      //       endDate: "2022-10-06",
+      //       progress: 75,
+      //       category: [
+      //         {
+      //           value: "team",
+      //           label: "team",
+      //         },
+      //         {
+      //           value: "low",
+      //           label: "low",
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
+      // {
+      //   id: uuidv4(),
+      //   name: "Done",
+      //   color: "#50C793",
+      //   tasks: [
+      //     {
+      //       id: uuidv4(),
+      //       assignee: [
+      //         {
+      //           image: "/assets/images/avatar/av-1.svg",
+      //           title: "Mahedi Amin",
+      //         },
+      //         {
+      //           image: "/assets/images/avatar/av-2.svg",
+      //           title: "Sovo Haldar",
+      //         },
+      //         {
+      //           image: "/assets/images/avatar/av-3.svg",
+      //           title: "Rakibul Islam",
+      //         },
+      //       ],
+      //       name: "Management Dashboard ",
+      //       des: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      //       startDate: "2022-10-03",
+      //       endDate: "2022-10-06",
+      //       progress: 40,
+      //       category: [
+      //         {
+      //           value: "team",
+      //           label: "team",
+      //         },
+      //         {
+      //           value: "low",
+      //           label: "low",
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
     ],
     isLoading: false,
   },

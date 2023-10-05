@@ -38,12 +38,14 @@ const Task = ({ task }) => {
       <header className="flex justify-between items-end">
         <div className="flex space-x-4 items-center rtl:space-x-reverse">
           <div className="flex-none">
+{/* row 1 name */}
             <div className="h-10 w-10 rounded-md text-lg bg-slate-100 text-slate-900 dark:bg-slate-600 dark:text-slate-200 flex flex-col items-center justify-center font-normal capitalize">
               {name.charAt(0) + name.charAt(1)}
             </div>
           </div>
           <div className="font-medium text-base leading-6">
-            <div className="dark:text-slate-200 text-slate-900 max-w-[160px] truncate">
+            <div className="dark:text-slate-200 text-slate-900 max-w-[160px] truncate"> 
+{/* row 1 description */}
               {name}
             </div>
           </div>
@@ -51,6 +53,7 @@ const Task = ({ task }) => {
         <div>
           <Dropdown
             classMenuItems=" w-[130px]"
+
             label={
               <span className="text-lg inline-flex flex-col items-center justify-center h-8 w-8 rounded-full bg-gray-500-f7 dark:bg-slate-900 dark:text-slate-400">
                 <Icon icon="heroicons-outline:dots-vertical" />
@@ -96,31 +99,31 @@ const Task = ({ task }) => {
         </div>
       </header>
       {/* description */}
-      <div className="text-slate-600 dark:text-slate-400 text-sm pt-4 pb-8">
+      {/* <div className="text-slate-600 dark:text-slate-400 text-sm pt-4 pb-8">
         {des}
-      </div>
+      </div> */}
       {/* assignee */}
-      <div className="flex space-x-4 rtl:space-x-reverse">
+      {/* <div className="flex space-x-4 rtl:space-x-reverse"> */}
         {/* start date */}
-        <div>
+        {/* <div>
           <span className="block date-label">Start date</span>
           <span className="block date-text">{startDate}</span>
-        </div>
+        </div> */}
         {/* end date */}
-        <div>
+        {/* <div>
           <span className="block date-label">Start date</span>
           <span className="block date-text">{endDate}</span>
         </div>
-      </div>
+      </div> */}
       {/* progress bar */}
-      <div className="ltr:text-right rtl:text-left text-xs text-slate-600 dark:text-slate-300 mb-1 font-medium">
+      {/* <div className="ltr:text-right rtl:text-left text-xs text-slate-600 dark:text-slate-300 mb-1 font-medium">
         {progress}%
       </div>
-      <ProgressBar value={progress} className="bg-primary-500" />
+      <ProgressBar value={progress} className="bg-primary-500" /> */}
       {/* assignee and total date */}
-      <div className="grid grid-cols-2 gap-4 mt-6">
+      {/* <div className="grid grid-cols-2 gap-4 mt-6"> */}
         {/* assignee */}
-        <div>
+        {/* <div>
           <div className="text-slate-400 dark:text-slate-400 text-sm font-normal mb-3">
             Assigned to
           </div>
@@ -141,10 +144,10 @@ const Task = ({ task }) => {
               +2
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* total date */}
-        <div className="ltr:text-right rtl:text-left">
+        {/* <div className="ltr:text-right rtl:text-left">
           <span className="inline-flex items-center space-x-1 bg-danger-500 bg-opacity-[0.16] text-danger-500 text-xs font-normal px-2 py-1 rounded-full rtl:space-x-reverse">
             <span>
               {" "}
@@ -154,7 +157,7 @@ const Task = ({ task }) => {
             <span>days left</span>
           </span>
         </div>
-      </div>
+      </div> */}
     </Card>
   );
 };
